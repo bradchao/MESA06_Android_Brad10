@@ -11,6 +11,12 @@
         android:text="test1"
         android:onClick="test1"
         />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test2"
+        android:onClick="test2"
+        />
 
     <TextView
         android:id="@+id/tv"

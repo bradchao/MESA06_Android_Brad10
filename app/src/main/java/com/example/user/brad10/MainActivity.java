@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             fout.close();
             Toast.makeText(this, "Save OK", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
-            Log.v("brad", e.toString());
+            Log.v("brad", "test3():" + e.toString());
         }
 
     }
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             reader.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.v("brad", "test4():" + e.toString());
         }
     }
 }

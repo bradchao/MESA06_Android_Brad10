@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
     private TextView tv;
-    private File sdroot;
+    private File sdroot, approot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,18 +48,24 @@ public class MainActivity extends AppCompatActivity {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_EXTERNAL_STORAGE},
                     123);
+        }else {
+            init();
         }
     }
 
+    private void init(){
+        approot = new File(sdroot, "Android/data/" + getPackageName());
+        if (!approot.exists()) approot.mkdirs();
+    }
+
     // callback
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         for (int grantResult : grantResults){
             if (grantResult == PackageManager.PERMISSION_GRANTED){
                 Log.v("brad", "OK");
+                init();
             }
         }
     }
@@ -127,13 +133,13 @@ public class MainActivity extends AppCompatActivity {
     public void test6(View v){
         try {
             FileOutputStream fout =
-                    new FileOutputStream(new File(sdroot, "file1.txt"));
+                    new FileOutputStream(new File(approot, "file1.txt"));
             fout.write("Hello1".getBytes());
             fout.flush();
             fout.close();
-            Toast.makeText(this, "Save1 OK", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Save2 OK", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
-            Log.v("brad", "test5():" +e.toString());
+            Log.v("brad", "test6():" +e.toString());
         }
     }
 }

@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences sp;
@@ -48,9 +50,10 @@ public class MainActivity extends AppCompatActivity {
         // 在 內存空間之下的 FileSystem
         try {
             FileOutputStream fout = openFileOutput("brad.data", MODE_PRIVATE);
-            fout.write("Hello, Brad".getBytes());
+            fout.write("Hello, Brad\nHello, World\n1234567\n7654321\nabcdefg\n".getBytes());
             fout.flush();
             fout.close();
+            Toast.makeText(this, "Save OK", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Log.v("brad", e.toString());
         }
@@ -58,6 +61,18 @@ public class MainActivity extends AppCompatActivity {
     }
     // 內存 read
     public void test4(View v){
+        tv.setText("");
+        try {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(openFileInput("brad.data")));
+            String line;
+            while ( (line = reader.readLine()) != null){
+                tv.append(line + "\n");
+            }
+            reader.close();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

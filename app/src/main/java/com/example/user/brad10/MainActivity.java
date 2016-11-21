@@ -109,4 +109,31 @@ public class MainActivity extends AppCompatActivity {
             Log.v("brad", "test4():" + e.toString());
         }
     }
+
+    //
+    public void test5(View v){
+        try {
+            FileOutputStream fout =
+                    new FileOutputStream(new File(sdroot, "file1.txt"));
+            fout.write("Hello1".getBytes());
+            fout.flush();
+            fout.close();
+            Toast.makeText(this, "Save1 OK", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Log.v("brad", "test5():" +e.toString());
+        }
+    }
+    //
+    public void test6(View v){
+        try {
+            FileOutputStream fout =
+                    new FileOutputStream(new File(sdroot, "file1.txt"));
+            fout.write("Hello1".getBytes());
+            fout.flush();
+            fout.close();
+            Toast.makeText(this, "Save1 OK", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Log.v("brad", "test5():" +e.toString());
+        }
+    }
 }
